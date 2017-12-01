@@ -35,7 +35,7 @@ namespace Checksumator
                     gbResult.IsEnabled = true;
 
                     HashFile(_file,gAlgorithmSingle);
-                    tbResult.Text = _file.Checksum;
+                    tbResult.Text = _file.Hash.Hash;
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace Checksumator
                 gbResult.IsEnabled = true;
 
                 HashFile(_file, gAlgorithmSingle);
-                tbResult.Text = _file.Checksum;
+                tbResult.Text = _file.Hash.Hash;
             }
             else
             {
@@ -80,7 +80,7 @@ namespace Checksumator
                 if (rbAlgorithm.IsChecked.Value)
                 {
                     HashFile(_file, gAlgorithmSingle);
-                    tbResult.Text = _file.Checksum;
+                    tbResult.Text = _file.Hash.Hash;
                 }
             }
         }
@@ -134,8 +134,8 @@ namespace Checksumator
             {
                 HashFile(file, gAlgorithmMuliple);
             }
-            lvFiles.Items.Refresh();
 
+            lvFiles.Items.Refresh();
         }
 
         #endregion
@@ -159,22 +159,22 @@ namespace Checksumator
                     if (rbTemp.IsChecked.Value)
                     {
                         if (rbTemp.Content.ToString().ToLower().Equals("md5"))
-                            file.Checksum = Cryptographic.CalculateMD5(File.ReadAllBytes(file.FullName));
+                            file.Hash = new Checksum(algo.MD5, Cryptographic.CalculateMD5(File.ReadAllBytes(file.FullName)));
 
                         if (rbTemp.Content.ToString().ToLower().Equals("sha1"))
-                            file.Checksum = Cryptographic.CalculateSHA1(File.ReadAllBytes(file.FullName));
+                            file.Hash = new Checksum(algo.SHA1, Cryptographic.CalculateSHA1(File.ReadAllBytes(file.FullName)));
                         
                         if (rbTemp.Content.ToString().ToLower().Equals("sha2"))
-                            file.Checksum = Cryptographic.CalculateSHA2(File.ReadAllBytes(file.FullName));
+                            file.Hash = new Checksum(algo.SHA2, Cryptographic.CalculateSHA2(File.ReadAllBytes(file.FullName)));
 
                         if (rbTemp.Content.ToString().ToLower().Equals("sha3"))
-                            file.Checksum = Cryptographic.CalculateSHA3(File.ReadAllBytes(file.FullName));
+                            file.Hash = new Checksum(algo.SHA3, Cryptographic.CalculateSHA3(File.ReadAllBytes(file.FullName)));
 
                         if (rbTemp.Content.ToString().ToLower().Equals("crc32"))
-                            file.Checksum = Cryptographic.CalculateCRC32(File.ReadAllBytes(file.FullName));
+                            file.Hash = new Checksum(algo.CRC32, Cryptographic.CalculateCRC32(File.ReadAllBytes(file.FullName)));
 
                         if (rbTemp.Content.ToString().ToLower().Equals("crc64"))
-                            file.Checksum = Cryptographic.CalculateCRC64(File.ReadAllBytes(file.FullName));
+                            file.Hash = new Checksum(algo.CRC64, Cryptographic.CalculateCRC64(File.ReadAllBytes(file.FullName)));
                     }
                 }
             }

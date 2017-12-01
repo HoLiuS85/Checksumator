@@ -35,20 +35,20 @@
             </TabItem>
             <TabItem Header="Multiple Files">
                 <Grid >
-                    <ListView Margin="10,10,10,110" Name="lvFiles" VerticalAlignment="Top" BorderThickness="1" MinHeight="120" MaxHeight="500"  >
+                    <ListView Margin="10,10,10,110" Name="lvFiles" VerticalAlignment="Top" BorderThickness="1" MinHeight="120" MaxHeight="500" HorizontalContentAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="File">
+                                <GridViewColumn Header="File" >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding FullName}" Foreground="Black" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Hash">
+                                <GridViewColumn Header="Hash"  >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Checksum}" Foreground="Black" />
+                                            <TextBlock Text="{Binding Hash.Hash}" Foreground="Black" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
